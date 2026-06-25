@@ -102,7 +102,18 @@ Instead of simply reminding users, the application helps them take meaningful ac
 ## 🌐 Live Demo
 
 ### Frontend
-https://your-netlify-url.netlify.app
+🌐 Live Demo
+Frontend
+https://secondchanceai.netlify.app/
+
+Backend API
+https://second-chance-ai.onrender.com
+
+API Documentation (Swagger)
+https://second-chance-ai.onrender.com/docs
+
+GitHub Repository
+https://github.com/Varunsuryateja-cmd/second-chance-ai
 
 ### Backend API
 https://second-chance-ai.onrender.com
