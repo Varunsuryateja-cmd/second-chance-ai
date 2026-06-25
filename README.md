@@ -191,6 +191,19 @@ Screenshots are available in the `screenshots` folder:
 - Advanced analytics dashboard
 
 ---
+## 🌐 Live Demo
+
+### Frontend
+https://secondchanceai.netlify.app/
+
+### Backend API
+https://second-chance-ai.onrender.com
+
+### API Documentation (Swagger)
+https://second-chance-ai.onrender.com/docs
+
+### GitHub Repository
+https://github.com/Varunsuryateja-cmd/second-chance-ai
 
 ## 👨‍💻 Developed By
 
