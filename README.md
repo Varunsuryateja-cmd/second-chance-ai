@@ -99,17 +99,18 @@ Instead of simply reminding users, the application helps them take meaningful ac
 - Google Cloud Deployment
 
 ---
-🌐 Live Demo
-Frontend
-https://secondchanceai.netlify.app/
+## 🌐 Live Demo
 
-Backend API
+### Frontend
+https://your-netlify-url.netlify.app
+
+### Backend API
 https://second-chance-ai.onrender.com
 
-API Documentation (Swagger)
+### API Documentation (Swagger)
 https://second-chance-ai.onrender.com/docs
 
-GitHub Repository
+### GitHub Repository
 https://github.com/Varunsuryateja-cmd/second-chance-ai
 
 ## 📂 Project Structure
