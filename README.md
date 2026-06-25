@@ -115,15 +115,6 @@ https://second-chance-ai.onrender.com/docs
 GitHub Repository
 https://github.com/Varunsuryateja-cmd/second-chance-ai
 
-### Backend API
-https://second-chance-ai.onrender.com
-
-### API Documentation (Swagger)
-https://second-chance-ai.onrender.com/docs
-
-### GitHub Repository
-https://github.com/Varunsuryateja-cmd/second-chance-ai
-
 ## 📂 Project Structure
 
 ```text
