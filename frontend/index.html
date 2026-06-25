@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Second Chance AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="ti ti-rocket" aria-hidden="true"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Second Chance AI</span>
+          <span class="brand-tagline">Don't just remember. Finish.</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="dashboard">
+          <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-page="tasks">
+          <i class="ti ti-layout-list" aria-hidden="true"></i>
+          <span>Tasks</span>
+        </button>
+        <button class="nav-item" data-page="calendar">
+          <i class="ti ti-calendar" aria-hidden="true"></i>
+          <span>Calendar</span>
+        </button>
+        <button class="nav-item" data-page="insights">
+          <i class="ti ti-chart-bar" aria-hidden="true"></i>
+          <span>Insights</span>
+        </button>
+        <button class="nav-item" data-page="settings">
+          <i class="ti ti-settings" aria-hidden="true"></i>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="ai-coach-card">
+          <div class="ai-coach-title">
+            <i class="ti ti-robot" aria-hidden="true"></i>
+            AI Coach
+          </div>
+          <p class="ai-coach-text" id="coachMessage">3 tasks at risk today. Your deadline window is tight — run Rescue Mode?</p>
+          <button class="coach-btn" id="rescueBtn">Run Rescue Mode</button>
+        </div>
+
+        <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
+          <span class="toggle-label">
+            <i class="ti ti-moon" aria-hidden="true"></i>
+            Dark mode
+          </span>
+          <div class="toggle-pill" aria-hidden="true">
+            <div class="toggle-dot"></div>
+          </div>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="main" id="mainContent">
+
+      <!-- Dashboard Page -->
+      <section class="page active" id="page-dashboard">
+
+        <div class="date-row">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span id="dateDisplay"></span>
+        </div>
+
+        <h1 class="hero-headline">
+          You have <span class="hero-accent" id="focusHours">4 hours of focus</span> left.
+        </h1>
+        <p class="hero-sub">Here's what matters.</p>
+
+        <!-- Brain Dump -->
+        <div class="card brain-card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="ti ti-brain" aria-hidden="true"></i>
+              Brain dump
+            </div>
+            <span class="card-hint">AI extracts tasks, deadlines &amp; energy</span>
+          </div>
+          <textarea
+            class="brain-input"
+            id="brainInput"
+            placeholder="Tomorrow I need to submit the ISRO deck, finish the FastAPI backend, and reply to the hackathon team by noon..."
+            rows="3"
+            aria-label="Brain dump — describe everything on your mind"
+          ></textarea>
+          <div class="brain-actions">
+            <div class="brain-actions-left">
+              <button class="btn-primary" id="convertBtn">
+                <i class="ti ti-wand" aria-hidden="true"></i>
+                Convert to plan
+              </button>
+              <button class="btn-ghost" id="voiceBtn">
+                <i class="ti ti-microphone" aria-hidden="true"></i>
+                Voice
+              </button>
+            </div>
+            <span class="brain-tip">Try: "Submit ISRO deck by Friday, review paper draft"</span>
+          </div>
+        </div>
+
+        <!-- Metrics Row -->
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">
+              <i class="ti ti-circle-check" aria-hidden="true"></i>
+              Completion probability
+            </div>
+            <div class="metric-value violet" id="completionProb">73%</div>
+            <div class="metric-sub">Today's plan is achievable</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">
+              <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+              At-risk tasks
+            </div>
+            <div class="metric-value coral" id="atRiskCount">3</div>
+            <div class="metric-sub">Rescue mode available</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">
+              <i class="ti ti-clock" aria-hidden="true"></i>
+              Focus time available
+            </div>
+            <div class="metric-value white" id="focusTime">4h 05m</div>
+            <div class="metric-sub">Until evening commitments</div>
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="bottom-row">
+
+          <!-- Up Next -->
+          <div class="card up-next-card">
+            <div class="card-header">
+              <div class="card-title light">
+                <i class="ti ti-player-play" aria-hidden="true"></i>
+                Up next
+              </div>
+              <span class="badge badge-red" id="urgentCount">3 urgent</span>
+            </div>
+            <div class="task-list" id="taskList">
+              <!-- Populated by JS -->
+            </div>
+            <button class="btn-ghost full-width" id="addTaskBtn" style="margin-top:12px;">
+              <i class="ti ti-plus" aria-hidden="true"></i>
+              Add task
+            </button>
+          </div>
+
+          <!-- Energy Forecast -->
+          <div class="card energy-card">
+            <div class="card-header">
+              <div class="card-title amber">
+                <i class="ti ti-bolt" aria-hidden="true"></i>
+                Energy forecast
+              </div>
+            </div>
+            <p class="energy-desc">Deep work scheduled into your 10am peak.</p>
+            <div class="energy-bars" id="energyBars">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Tasks Page -->
+      <section class="page" id="page-tasks">
+        <h2 class="page-heading">Tasks</h2>
+
+        <div class="card" style="margin-bottom:16px;">
+          <div class="task-add-row">
+            <input type="text" class="task-input" id="newTaskTitle" placeholder="Task title" aria-label="Task title" />
+            <input type="datetime-local" class="task-input" id="newTaskDeadline" aria-label="Deadline" />
+            <input type="number" class="task-input" id="newTaskHours" placeholder="Est. hours" min="0.5" step="0.5" aria-label="Estimated hours" />
+            <select class="task-input" id="newTaskPriority" aria-label="Priority">
+              <option value="">Priority</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <button class="btn-primary pulse" id="addTaskSubmit">
+              <i class="ti ti-plus" aria-hidden="true"></i>
+              Add task
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title light">All tasks</div>
+            <div class="task-filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="high">High</button>
+              <button class="filter-btn" data-filter="medium">Medium</button>
+              <button class="filter-btn" data-filter="low">Low</button>
+            </div>
+          </div>
+          <div class="task-list full" id="allTaskList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Calendar Page -->
+     <!-- Calendar Page -->
+<section class="page" id="page-calendar">
+  <h2 class="page-heading">Calendar</h2>
+
+  <div class="card">
+    <iframe
+      src="https://calendar.google.com/calendar/embed?mode=MONTH"
+      style="
+        border:0;
+        width:100%;
+        height:700px;
+        border-radius:20px;
+      "
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+</section>
+
+      <!-- Insights Page -->
+      <section class="page" id="page-insights">
+        <h2 class="page-heading">Insights</h2>
+        <div class="metrics-row" style="margin-bottom:16px;">
+          <div class="metric-card">
+            <div class="metric-label"><i class="ti ti-check" aria-hidden="true"></i> Completed this week</div>
+            <div class="metric-value violet" id="completedCount">0</div>
+            <div class="metric-sub">Keep the streak going</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label"><i class="ti ti-flame" aria-hidden="true"></i> Current streak</div>
+            <div class="metric-value amber-val">0 days</div>
+            <div class="metric-sub">Daily completion streak</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label"><i class="ti ti-trophy" aria-hidden="true"></i> Productivity score</div>
+            <div class="metric-value white">—</div>
+            <div class="metric-sub">Add tasks to calculate</div>
+          </div>
+        </div>
+   <div class="chart-container">
+    <canvas id="completionChart"></canvas>
+</div>
+      </section>
+
+      <!-- Settings Page -->
+      <section class="page" id="page-settings">
+        <h2 class="page-heading">Settings</h2>
+        <div class="card settings-card">
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Username</span>
+              <span class="setting-desc">Your display name across the app</span>
+            </div>
+            <input type="text" class="task-input" id="usernameInput" value="Varun Surya Teja" style="width:200px;" />
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Dark mode</span>
+              <span class="setting-desc">Toggle light / dark theme</span>
+            </div>
+            <button class="coach-btn" id="darkToggleSettings" style="width:120px;">Toggle theme</button>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Clear all tasks</span>
+              <span class="setting-desc">Permanently remove all task data</span>
+            </div>
+            <button class="btn-danger" id="clearTasksBtn">Clear tasks</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
